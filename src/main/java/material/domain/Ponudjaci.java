@@ -1,6 +1,7 @@
 package material.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -21,6 +22,18 @@ public class Ponudjaci implements Serializable {
     @NotNull
     @Column(name = "naziv_ponudjaca", nullable = false)
     private String nazivPonudjaca;
+
+    @NotNull
+    @Column(name = "datum", nullable = false)
+    private Date datum;
+
+    public Date getDatum() {
+        return datum;
+    }
+
+    public void setDatum(Date datum) {
+        this.datum = datum;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
