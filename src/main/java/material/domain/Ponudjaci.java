@@ -1,9 +1,11 @@
 package material.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * A Ponudjaci.
@@ -25,13 +27,13 @@ public class Ponudjaci implements Serializable {
 
     @NotNull
     @Column(name = "datum", nullable = false)
-    private Date datum;
+    private LocalDate datum;
 
-    public Date getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(LocalDate datum) {
         this.datum = datum;
     }
 
