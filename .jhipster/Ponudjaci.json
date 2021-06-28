@@ -1,0 +1,15 @@
+{
+  "fields": [
+    {
+      "fieldName": "nazivPonudjaca",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [],
+  "service": "no",
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Ponudjaci",
+  "changelogDate": "20210628172908"
+}
