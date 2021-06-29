@@ -18,6 +18,7 @@ export class PonudjaciUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     nazivPonudjaca: [null, [Validators.required]],
+    datum: [],
   });
 
   constructor(protected ponudjaciService: PonudjaciService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
