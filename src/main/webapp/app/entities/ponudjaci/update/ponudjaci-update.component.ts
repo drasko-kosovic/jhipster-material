@@ -8,6 +8,7 @@ import { finalize } from 'rxjs/operators';
 import { IPonudjaci, Ponudjaci } from '../ponudjaci.model';
 import { PonudjaciService } from '../service/ponudjaci.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import * as moment from 'moment';
 
 @Component({
   selector: 'jhi-ponudjaci-update',
@@ -25,10 +26,14 @@ export class PonudjaciUpdateComponent {
     this.nazivPonudjaca = nazivPonudjaca;
 
     this.form = this.fb.group({
-      id: [id, Validators.required],
-      nazivPonudjaca: [nazivPonudjaca, Validators.required],
-      datum: [datum, Validators.required],
+      id: [id],
+      nazivPonudjaca: [nazivPonudjaca],
+      datum: [datum],
     });
+  }
+
+  save(): any {
+    this.dialogRef.close(this.form.value);
   }
 
   close(): any {

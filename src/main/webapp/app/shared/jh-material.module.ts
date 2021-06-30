@@ -22,9 +22,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatMenuModule } from '@angular/material/menu';
 import { NgModule } from '@angular/core';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
   imports: [
+    MatMomentDateModule,
     MatButtonModule,
     MatCheckboxModule,
     MatFormFieldModule,
@@ -73,6 +75,7 @@ import { NgModule } from '@angular/core';
     MatRadioModule,
     MatListModule,
     MatIconModule,
+    MatMomentDateModule,
   ],
 })
 export class JhMaterialModule {}
