@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -13,7 +13,7 @@ import { PonudeUpdateComponent } from '../update/ponude-update.component';
   selector: 'jhi-ponude',
   templateUrl: './ponude.component.html',
 })
-export class PonudeComponent implements OnInit {
+export class PonudeComponent implements OnInit, OnChanges {
   ponudes?: IPonude[];
   isLoading = false;
 
@@ -69,5 +69,9 @@ export class PonudeComponent implements OnInit {
       // eslint-disable-next-line no-console
       val => console.log('Dialog output:', val)
     );
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loadAll();
   }
 }

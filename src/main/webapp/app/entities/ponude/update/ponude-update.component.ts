@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
@@ -22,6 +22,7 @@ export class PonudeUpdateComponent implements OnInit {
   ponudjacisCollection: IPonudjaci[] = [];
 
   constructor(
+    private router: Router,
     protected ponudeService: PonudeService,
     protected ponudjaciService: PonudjaciService,
     protected activatedRoute: ActivatedRoute,
@@ -45,21 +46,24 @@ export class PonudeUpdateComponent implements OnInit {
   }
 
   previousState(): void {
-    window.history.back();
+    // window.history.back();
+    this.router.navigate(['/ponude']);
   }
-  close(): any {
-    this.dialogRef.close();
-  }
+
   save(): void {
     this.isSaving = true;
     const ponude = this.createFromForm();
     if (ponude.id !== undefined) {
       this.subscribeToSaveResponse(this.ponudeService.update(ponude));
+      this.dialogRef.close();
+      // this.router.navigate(['/ponude'])
     } else {
       this.subscribeToSaveResponse(this.ponudeService.create(ponude));
     }
   }
-
+  close(): any {
+    this.dialogRef.close();
+  }
   trackPonudjaciById(index: number, item: IPonudjaci): number {
     return item.id!;
   }
