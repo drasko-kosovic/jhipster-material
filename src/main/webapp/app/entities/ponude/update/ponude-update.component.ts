@@ -33,15 +33,12 @@ export class PonudeUpdateComponent implements OnInit {
     this.editForm = this.fb.group({
       id: [id],
       naziv: [naziv],
-      ponudjaci: [],
     });
   }
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ ponude }) => {
       this.updateForm(ponude);
-
-      this.loadRelationshipsOptions();
     });
   }
 
@@ -49,16 +46,20 @@ export class PonudeUpdateComponent implements OnInit {
     // window.history.back();
     this.router.navigate(['/ponude']);
   }
-
+  public confirmAdd(): void {
+    const ponude = this.createFromForm();
+    this.ponudeService.create(ponude).subscribe();
+    this.dialogRef.close();
+  }
   save(): void {
     this.isSaving = true;
     const ponude = this.createFromForm();
     if (ponude.id !== undefined) {
       this.subscribeToSaveResponse(this.ponudeService.update(ponude));
       this.dialogRef.close();
-      // this.router.navigate(['/ponude'])
     } else {
       this.subscribeToSaveResponse(this.ponudeService.create(ponude));
+      this.dialogRef.close();
     }
   }
   close(): any {
@@ -91,22 +92,9 @@ export class PonudeUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: ponude.id,
       naziv: ponude.naziv,
-      ponudjaci: ponude.ponudjaci,
     });
 
     this.ponudjacisCollection = this.ponudjaciService.addPonudjaciToCollectionIfMissing(this.ponudjacisCollection, ponude.ponudjaci);
-  }
-
-  protected loadRelationshipsOptions(): void {
-    this.ponudjaciService
-      .query({ filter: 'ponude-is-null' })
-      .pipe(map((res: HttpResponse<IPonudjaci[]>) => res.body ?? []))
-      .pipe(
-        map((ponudjacis: IPonudjaci[]) =>
-          this.ponudjaciService.addPonudjaciToCollectionIfMissing(ponudjacis, this.editForm.get('ponudjaci')!.value)
-        )
-      )
-      .subscribe((ponudjacis: IPonudjaci[]) => (this.ponudjacisCollection = ponudjacis));
   }
 
   protected createFromForm(): IPonude {
@@ -114,7 +102,6 @@ export class PonudeUpdateComponent implements OnInit {
       ...new Ponude(),
       id: this.editForm.get(['id'])!.value,
       naziv: this.editForm.get(['naziv'])!.value,
-      ponudjaci: this.editForm.get(['ponudjaci'])!.value,
     };
   }
 }
