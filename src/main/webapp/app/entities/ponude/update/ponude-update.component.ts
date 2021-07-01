@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -9,6 +9,8 @@ import { IPonude, Ponude } from '../ponude.model';
 import { PonudeService } from '../service/ponude.service';
 import { IPonudjaci } from 'app/entities/ponudjaci/ponudjaci.model';
 import { PonudjaciService } from 'app/entities/ponudjaci/service/ponudjaci.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {PonudjaciUpdateComponent} from "../../ponudjaci/update/ponudjaci-update.component";
 
 @Component({
   selector: 'jhi-ponude-update',
@@ -29,7 +31,9 @@ export class PonudeUpdateComponent implements OnInit {
     protected ponudeService: PonudeService,
     protected ponudjaciService: PonudjaciService,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    private dialogRef: MatDialogRef<PonudeUpdateComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +47,9 @@ export class PonudeUpdateComponent implements OnInit {
   previousState(): void {
     window.history.back();
   }
-
+  close(): any {
+    this.dialogRef.close();
+  }
   save(): void {
     this.isSaving = true;
     const ponude = this.createFromForm();
@@ -98,6 +104,156 @@ export class PonudeUpdateComponent implements OnInit {
       )
       .subscribe((ponudjacis: IPonudjaci[]) => (this.ponudjacisCollection = ponudjacis));
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   protected createFromForm(): IPonude {
     return {

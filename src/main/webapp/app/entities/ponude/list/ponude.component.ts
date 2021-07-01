@@ -5,6 +5,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IPonude } from '../ponude.model';
 import { PonudeService } from '../service/ponude.service';
 import { PonudeDeleteDialogComponent } from '../delete/ponude-delete-dialog.component';
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {IPonudjaci} from "../../ponudjaci/ponudjaci.model";
+import {PonudeUpdateComponent} from "../update/ponude-update.component";
 
 @Component({
   selector: 'jhi-ponude',
@@ -14,7 +17,7 @@ export class PonudeComponent implements OnInit {
   ponudes?: IPonude[];
   isLoading = false;
 
-  constructor(protected ponudeService: PonudeService, protected modalService: NgbModal) {}
+  constructor(protected ponudeService: PonudeService, protected modalService: NgbModal, public dialog: MatDialog) {}
 
   loadAll(): void {
     this.isLoading = true;
@@ -47,5 +50,26 @@ export class PonudeComponent implements OnInit {
         this.loadAll();
       }
     });
+  }
+
+
+  startEdit({ id, ime }: IPonudjaci): any {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      id,
+      ime
+    };
+
+    const dialogRef = this.dialog.open(PonudeUpdateComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      // eslint-disable-next-line no-console
+      val => console.log('Dialog output:', val)
+
+    );
   }
 }
