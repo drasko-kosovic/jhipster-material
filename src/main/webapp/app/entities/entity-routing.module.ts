@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'Ponudes' },
         loadChildren: () => import('./ponude/ponude.module').then(m => m.PonudeModule),
       },
-      /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
+
     ]),
   ],
 })

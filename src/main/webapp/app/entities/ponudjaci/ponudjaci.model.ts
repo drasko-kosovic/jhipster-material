@@ -1,11 +1,10 @@
 export interface IPonudjaci {
   id?: number;
-  nazivPonudjaca?: string;
-  datum?: Date;
+  ime?: string;
 }
 
 export class Ponudjaci implements IPonudjaci {
-  constructor(public id?: number, public nazivPonudjaca?: string, public datum?: Date) {}
+  constructor(public id?: number, public ime?: string) {}
 }
 
 export function getPonudjaciIdentifier(ponudjaci: IPonudjaci): number | undefined {

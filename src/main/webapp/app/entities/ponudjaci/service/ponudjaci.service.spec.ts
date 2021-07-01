@@ -22,7 +22,7 @@ describe('Service Tests', () => {
 
       elemDefault = {
         id: 0,
-        nazivPonudjaca: 'AAAAAAA',
+        ime: 'AAAAAAA',
       };
     });
 
@@ -58,7 +58,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
-            nazivPonudjaca: 'BBBBBB',
+            ime: 'BBBBBB',
           },
           elemDefault
         );
@@ -90,7 +90,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
-            nazivPonudjaca: 'BBBBBB',
+            ime: 'BBBBBB',
           },
           elemDefault
         );

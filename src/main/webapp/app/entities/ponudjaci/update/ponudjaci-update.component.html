@@ -1,28 +1,40 @@
-<mat-card>
-  <h2 mat-dialog-title>{{ nazivPonudjaca }}</h2>
-  <mat-dialog-content [formGroup]="form">
-    <mat-form-field>
-      <input matInput placeholder="naziv Ponudjaca" formControlName="nazivPonudjaca" />
-    </mat-form-field>
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-ponudjaci-heading" data-cy="PonudjaciCreateUpdateHeading">Create or edit a Ponudjaci</h2>
 
-    <mat-form-field>
-      <input matInput placeholder="id" formControlName="id" />
-    </mat-form-field>
-    <!--    <mat-form-field>-->
-    <!--      <input matInput placeholder="datum" formControlName="datum" />-->
-    <!--    </mat-form-field>-->
-    <!--    <mat-form-field>-->
-    <mat-form-field>
-      <input matInput [matDatepicker]="myDatepicker" formControlName="datum" />
+      <div>
+        <jhi-alert-error></jhi-alert-error>
 
-      <mat-datepicker-toggle matSuffix [for]="myDatepicker"> </mat-datepicker-toggle>
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
 
-      <mat-datepicker #myDatepicker></mat-datepicker>
-    </mat-form-field>
-  </mat-dialog-content>
+        <div class="form-group">
+          <label class="form-control-label" for="field_ime">Ime</label>
+          <input type="text" class="form-control" name="ime" id="field_ime" data-cy="ime" formControlName="ime" />
+          <div *ngIf="editForm.get('ime')!.invalid && (editForm.get('ime')!.dirty || editForm.get('ime')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('ime')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+      </div>
 
-  <mat-dialog-actions>
-    <button class="mat-raised-button" (click)="close()">Close</button>
-    <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
-  </mat-dialog-actions>
-</mat-card>
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

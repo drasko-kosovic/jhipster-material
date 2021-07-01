@@ -5,11 +5,11 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 /**
- * A Ponudjaci.
+ * A Ponude.
  */
 @Entity
-@Table(name = "ponudjaci")
-public class Ponudjaci implements Serializable {
+@Table(name = "ponude")
+public class Ponude implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -19,8 +19,12 @@ public class Ponudjaci implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "ime", nullable = false)
-    private String ime;
+    @Column(name = "naziv", nullable = false)
+    private String naziv;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Ponudjaci ponudjaci;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -31,22 +35,35 @@ public class Ponudjaci implements Serializable {
         this.id = id;
     }
 
-    public Ponudjaci id(Long id) {
+    public Ponude id(Long id) {
         this.id = id;
         return this;
     }
 
-    public String getIme() {
-        return this.ime;
+    public String getNaziv() {
+        return this.naziv;
     }
 
-    public Ponudjaci ime(String ime) {
-        this.ime = ime;
+    public Ponude naziv(String naziv) {
+        this.naziv = naziv;
         return this;
     }
 
-    public void setIme(String ime) {
-        this.ime = ime;
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+
+    public Ponudjaci getPonudjaci() {
+        return this.ponudjaci;
+    }
+
+    public Ponude ponudjaci(Ponudjaci ponudjaci) {
+        this.setPonudjaci(ponudjaci);
+        return this;
+    }
+
+    public void setPonudjaci(Ponudjaci ponudjaci) {
+        this.ponudjaci = ponudjaci;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -56,10 +73,10 @@ public class Ponudjaci implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Ponudjaci)) {
+        if (!(o instanceof Ponude)) {
             return false;
         }
-        return id != null && id.equals(((Ponudjaci) o).id);
+        return id != null && id.equals(((Ponude) o).id);
     }
 
     @Override
@@ -71,9 +88,9 @@ public class Ponudjaci implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "Ponudjaci{" +
+        return "Ponude{" +
             "id=" + getId() +
-            ", ime='" + getIme() + "'" +
+            ", naziv='" + getNaziv() + "'" +
             "}";
     }
 }

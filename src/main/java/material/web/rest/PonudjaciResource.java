@@ -126,8 +126,8 @@ public class PonudjaciResource {
             .findById(ponudjaci.getId())
             .map(
                 existingPonudjaci -> {
-                    if (ponudjaci.getNazivPonudjaca() != null) {
-                        existingPonudjaci.setNazivPonudjaca(ponudjaci.getNazivPonudjaca());
+                    if (ponudjaci.getIme() != null) {
+                        existingPonudjaci.setIme(ponudjaci.getIme());
                     }
 
                     return existingPonudjaci;

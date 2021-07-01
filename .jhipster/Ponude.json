@@ -1,0 +1,25 @@
+{
+  "fields": [
+    {
+      "fieldName": "naziv",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "ponudjaci",
+      "otherEntityName": "ponudjaci",
+      "relationshipType": "one-to-one",
+      "otherEntityField": "ime",
+      "ownerSide": true,
+      "id": false,
+      "otherEntityRelationshipName": "ponude"
+    }
+  ],
+  "service": "no",
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Ponude",
+  "changelogDate": "20210701073445"
+}

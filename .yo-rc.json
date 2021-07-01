@@ -43,7 +43,7 @@
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
     "languages": ["en", "fr"],
-    "lastLiquibaseTimestamp": 1624901348000,
+    "lastLiquibaseTimestamp": 1625124905000,
     "entities": ["Ponudjaci", "Ponude"]
   }
 }

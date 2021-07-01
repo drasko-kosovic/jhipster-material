@@ -1,8 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import * as dayjs from 'dayjs';
 
-import { DATE_FORMAT } from 'app/config/input.constants';
 import { IPonude, Ponude } from '../ponude.model';
 
 import { PonudeService } from './ponude.service';
@@ -13,7 +11,6 @@ describe('Service Tests', () => {
     let httpMock: HttpTestingController;
     let elemDefault: IPonude;
     let expectedResult: IPonude | IPonude[] | boolean | null;
-    let currentDate: dayjs.Dayjs;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -22,23 +19,16 @@ describe('Service Tests', () => {
       expectedResult = null;
       service = TestBed.inject(PonudeService);
       httpMock = TestBed.inject(HttpTestingController);
-      currentDate = dayjs();
 
       elemDefault = {
         id: 0,
-        nazivPonudjaca: 'AAAAAAA',
-        datumPonude: currentDate,
+        naziv: 'AAAAAAA',
       };
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
-        const returnedFromService = Object.assign(
-          {
-            datumPonude: currentDate.format(DATE_FORMAT),
-          },
-          elemDefault
-        );
+        const returnedFromService = Object.assign({}, elemDefault);
 
         service.find(123).subscribe(resp => (expectedResult = resp.body));
 
@@ -51,17 +41,11 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            datumPonude: currentDate.format(DATE_FORMAT),
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            datumPonude: currentDate,
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.create(new Ponude()).subscribe(resp => (expectedResult = resp.body));
 
@@ -74,18 +58,12 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
-            nazivPonudjaca: 'BBBBBB',
-            datumPonude: currentDate.format(DATE_FORMAT),
+            naziv: 'BBBBBB',
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            datumPonude: currentDate,
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.update(expected).subscribe(resp => (expectedResult = resp.body));
 
@@ -95,21 +73,11 @@ describe('Service Tests', () => {
       });
 
       it('should partial update a Ponude', () => {
-        const patchObject = Object.assign(
-          {
-            datumPonude: currentDate.format(DATE_FORMAT),
-          },
-          new Ponude()
-        );
+        const patchObject = Object.assign({}, new Ponude());
 
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
-        const expected = Object.assign(
-          {
-            datumPonude: currentDate,
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.partialUpdate(patchObject).subscribe(resp => (expectedResult = resp.body));
 
@@ -122,18 +90,12 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
-            nazivPonudjaca: 'BBBBBB',
-            datumPonude: currentDate.format(DATE_FORMAT),
+            naziv: 'BBBBBB',
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            datumPonude: currentDate,
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.query().subscribe(resp => (expectedResult = resp.body));
 
@@ -180,7 +142,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Ponude to an array', () => {
-          const ponudeArray: IPonude[] = [{ id: 123 }, { id: 456 }, { id: 78228 }];
+          const ponudeArray: IPonude[] = [{ id: 123 }, { id: 456 }, { id: 96698 }];
           const ponudeCollection: IPonude[] = [{ id: 123 }];
           expectedResult = service.addPonudeToCollectionIfMissing(ponudeCollection, ...ponudeArray);
           expect(expectedResult).toHaveLength(3);

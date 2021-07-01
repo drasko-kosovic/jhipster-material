@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-8">
-    <div *ngIf="ponudjaci">
-      <h2 data-cy="ponudjaciDetailsHeading"><span>Ponudjaci</span></h2>
+    <div *ngIf="ponude">
+      <h2 data-cy="ponudeDetailsHeading"><span>Ponude</span></h2>
 
       <hr />
 
@@ -12,11 +12,17 @@
       <dl class="row-md jh-entity-details">
         <dt><span>ID</span></dt>
         <dd>
-          <span>{{ ponudjaci.id }}</span>
+          <span>{{ ponude.id }}</span>
         </dd>
-        <dt><span>Ime</span></dt>
+        <dt><span>Naziv</span></dt>
         <dd>
-          <span>{{ ponudjaci.ime }}</span>
+          <span>{{ ponude.naziv }}</span>
+        </dd>
+        <dt><span>Ponudjaci</span></dt>
+        <dd>
+          <div *ngIf="ponude.ponudjaci">
+            <a [routerLink]="['/ponudjaci', ponude.ponudjaci?.id, 'view']">{{ ponude.ponudjaci?.ime }}</a>
+          </div>
         </dd>
       </dl>
 
@@ -24,7 +30,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/ponudjaci', ponudjaci.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/ponude', ponude.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
       </button>
     </div>

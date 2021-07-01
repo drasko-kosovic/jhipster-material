@@ -1,7 +1,7 @@
 {
   "fields": [
     {
-      "fieldName": "nazivPonudjaca",
+      "fieldName": "ime",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
     }
@@ -11,5 +11,5 @@
   "readOnly": false,
   "pagination": "no",
   "name": "Ponudjaci",
-  "changelogDate": "20210628172908"
+  "changelogDate": "20210701073505"
 }
