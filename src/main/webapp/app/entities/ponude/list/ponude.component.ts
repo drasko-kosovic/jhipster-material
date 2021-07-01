@@ -67,7 +67,16 @@ export class PonudeComponent implements OnInit, OnChanges {
 
     dialogRef.afterClosed().subscribe(
       // eslint-disable-next-line no-console
-      val => console.log('Dialog output:', val)
+      val =>
+        this.ponudeService.query().subscribe(
+          (res: HttpResponse<IPonude[]>) => {
+            this.isLoading = false;
+            this.ponudes = res.body ?? [];
+          },
+          () => {
+            this.isLoading = false;
+          }
+        )
     );
   }
 
