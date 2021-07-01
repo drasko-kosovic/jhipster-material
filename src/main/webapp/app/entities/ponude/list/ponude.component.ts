@@ -13,7 +13,7 @@ import { PonudeUpdateComponent } from '../update/ponude-update.component';
   selector: 'jhi-ponude',
   templateUrl: './ponude.component.html',
 })
-export class PonudeComponent implements OnInit, OnChanges {
+export class PonudeComponent implements OnInit {
   ponudes?: IPonude[];
   isLoading = false;
 
@@ -80,7 +80,9 @@ export class PonudeComponent implements OnInit, OnChanges {
     );
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.loadAll();
+  addNew(): any {
+    const dialogRef = this.dialog.open(PonudeUpdateComponent, {
+      data: { Ponude: {} },
+    });
   }
 }
