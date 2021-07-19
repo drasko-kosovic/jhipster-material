@@ -14,7 +14,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'Ponudes' },
         loadChildren: () => import('./ponude/ponude.module').then(m => m.PonudeModule),
       },
-
+      {
+        path: 'ugovor',
+        data: { pageTitle: 'Ugovor' },
+        loadChildren: () => import('./ugovor/ugovor.module').then(m => m.UgovorModule),
+      },
     ]),
   ],
 })

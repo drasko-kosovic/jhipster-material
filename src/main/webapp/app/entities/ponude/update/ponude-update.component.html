@@ -1,25 +1,53 @@
 <div class="row justify-content-center">
   <div class="col-8">
-    <mat-dialog-content [formGroup]="editForm" #form>
-      <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-        <h2 id="jhi-ponude-heading" data-cy="PonudeCreateUpdateHeading">Create or edit a Ponude</h2>
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-ponude-heading" data-cy="PonudeCreateUpdateHeading">Create or edit a Ponude</h2>
 
-        <div>
-          <jhi-alert-error></jhi-alert-error>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
 
-          <mat-form-field>
-            <input matInput placeholder="id" formControlName="id" />
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="naziv" formControlName="naziv" />
-          </mat-form-field>
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
-      </form>
-    </mat-dialog-content>
-    <mat-dialog-actions>
-      <button class="mat-raised-button" (click)="close()">Close</button>
-      <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
-      <button class="mat-raised-button mat-primary" (click)="confirmAdd()">Add</button>
-    </mat-dialog-actions>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_naziv">Naziv</label>
+          <input type="text" class="form-control" name="naziv" id="field_naziv" data-cy="naziv" formControlName="naziv" />
+          <div *ngIf="editForm.get('naziv')!.invalid && (editForm.get('naziv')!.dirty || editForm.get('naziv')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('naziv')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_ponudjaci">Ponudjaci</label>
+          <select class="form-control" id="field_ponudjaci" data-cy="ponudjaci" name="ponudjaci" formControlName="ponudjaci">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="ponudjaciOption.id === editForm.get('ponudjaci')!.value?.id ? editForm.get('ponudjaci')!.value : ponudjaciOption"
+              *ngFor="let ponudjaciOption of ponudjacisCollection; trackBy: trackPonudjaciById"
+            >
+              {{ ponudjaciOption.ime }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
   </div>
 </div>

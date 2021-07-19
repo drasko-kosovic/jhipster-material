@@ -1,13 +1,10 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IPonude } from '../ponude.model';
 import { PonudeService } from '../service/ponude.service';
 import { PonudeDeleteDialogComponent } from '../delete/ponude-delete-dialog.component';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { IPonudjaci } from '../../ponudjaci/ponudjaci.model';
-import { PonudeUpdateComponent } from '../update/ponude-update.component';
 
 @Component({
   selector: 'jhi-ponude',
@@ -17,7 +14,7 @@ export class PonudeComponent implements OnInit {
   ponudes?: IPonude[];
   isLoading = false;
 
-  constructor(protected ponudeService: PonudeService, protected modalService: NgbModal, public dialog: MatDialog) {}
+  constructor(protected ponudeService: PonudeService, protected modalService: NgbModal) {}
 
   loadAll(): void {
     this.isLoading = true;
@@ -50,52 +47,5 @@ export class PonudeComponent implements OnInit {
         this.loadAll();
       }
     });
-  }
-
-  startEdit({ id, naziv }: IPonude): any {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-
-    dialogConfig.data = {
-      id,
-      naziv,
-    };
-
-    const dialogRef = this.dialog.open(PonudeUpdateComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(
-      // eslint-disable-next-line no-console
-      val =>
-        this.ponudeService.query().subscribe(
-          (res: HttpResponse<IPonude[]>) => {
-            this.isLoading = false;
-            this.ponudes = res.body ?? [];
-          },
-          () => {
-            this.isLoading = false;
-          }
-        )
-    );
-  }
-
-  addNew(): any {
-    const dialogRef = this.dialog.open(PonudeUpdateComponent, {
-      data: { Ponude: {} },
-    });
-    dialogRef.afterClosed().subscribe(
-      // eslint-disable-next-line no-console
-      val =>
-        this.ponudeService.query().subscribe(
-          (res: HttpResponse<IPonude[]>) => {
-            this.isLoading = false;
-            this.ponudes = res.body ?? [];
-          },
-          () => {
-            this.isLoading = false;
-          }
-        )
-    );
   }
 }

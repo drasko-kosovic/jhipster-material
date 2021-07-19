@@ -18,5 +18,6 @@
 
     <include file="config/liquibase/changelog/20210701073445_added_entity_Ponude.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210701073505_added_entity_Ponudjaci.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210719055320_added_entity_Ugovor.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

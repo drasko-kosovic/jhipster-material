@@ -1,0 +1,42 @@
+{
+  "fields": [
+    {
+      "fieldName": "brojUgovora",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "datumUgovora",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "brojOdluke",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "datumOdluke",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "iznosUgovoraBezPdf",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "sifraPostupka",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "sifraPonude",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "sifraPonudjaca",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [],
+  "service": "no",
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Ugovor",
+  "changelogDate": "20210719055320"
+}

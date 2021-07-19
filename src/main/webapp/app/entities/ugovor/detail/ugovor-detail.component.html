@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="ugovor">
+      <h2 data-cy="ugovorDetailsHeading"><span>Ugovor</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ ugovor.id }}</span>
+        </dd>
+        <dt><span>Broj Ugovora</span></dt>
+        <dd>
+          <span>{{ ugovor.brojUgovora }}</span>
+        </dd>
+        <dt><span>Datum Ugovora</span></dt>
+        <dd>
+          <span>{{ ugovor.datumUgovora | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Broj Odluke</span></dt>
+        <dd>
+          <span>{{ ugovor.brojOdluke }}</span>
+        </dd>
+        <dt><span>Datum Odluke</span></dt>
+        <dd>
+          <span>{{ ugovor.datumOdluke | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Iznos Ugovora Bez Pdf</span></dt>
+        <dd>
+          <span>{{ ugovor.iznosUgovoraBezPdf }}</span>
+        </dd>
+        <dt><span>Sifra Postupka</span></dt>
+        <dd>
+          <span>{{ ugovor.sifraPostupka }}</span>
+        </dd>
+        <dt><span>Sifra Ponude</span></dt>
+        <dd>
+          <span>{{ ugovor.sifraPonude }}</span>
+        </dd>
+        <dt><span>Sifra Ponudjaca</span></dt>
+        <dd>
+          <span>{{ ugovor.sifraPonudjaca }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/ugovor', ugovor.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

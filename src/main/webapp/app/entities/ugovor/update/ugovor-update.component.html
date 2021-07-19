@@ -1,0 +1,158 @@
+<mat-dialog-content>
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+        <h2 id="jhi-ugovor-heading" data-cy="UgovorCreateUpdateHeading">Create or edit a Ugovor</h2>
+
+        <div>
+          <jhi-alert-error></jhi-alert-error>
+
+          <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+            <label class="form-control-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-control-label" for="field_brojUgovora">Broj Ugovora</label>
+            <input
+              type="text"
+              class="form-control"
+              name="brojUgovora"
+              id="field_brojUgovora"
+              data-cy="brojUgovora"
+              formControlName="brojUgovora"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-control-label" for="field_datumUgovora">Datum Ugovora</label>
+            <div class="input-group">
+              <input
+                id="field_datumUgovora"
+                data-cy="datumUgovora"
+                type="text"
+                class="form-control"
+                name="datumUgovora"
+                ngbDatepicker
+                #datumUgovoraDp="ngbDatepicker"
+                formControlName="datumUgovora"
+              />
+              <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="datumUgovoraDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-control-label" for="field_brojOdluke">Broj Odluke</label>
+            <input
+              type="text"
+              class="form-control"
+              name="brojOdluke"
+              id="field_brojOdluke"
+              data-cy="brojOdluke"
+              formControlName="brojOdluke"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-control-label" for="field_datumOdluke">Datum Odluke</label>
+            <div class="input-group">
+              <input
+                id="field_datumOdluke"
+                data-cy="datumOdluke"
+                type="text"
+                class="form-control"
+                name="datumOdluke"
+                ngbDatepicker
+                #datumOdlukeDp="ngbDatepicker"
+                formControlName="datumOdluke"
+              />
+              <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="datumOdlukeDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-control-label" for="field_iznosUgovoraBezPdf">Iznos Ugovora Bez Pdf</label>
+            <input
+              type="number"
+              class="form-control"
+              name="iznosUgovoraBezPdf"
+              id="field_iznosUgovoraBezPdf"
+              data-cy="iznosUgovoraBezPdf"
+              formControlName="iznosUgovoraBezPdf"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-control-label" for="field_sifraPostupka">Sifra Postupka</label>
+            <input
+              type="number"
+              class="form-control"
+              name="sifraPostupka"
+              id="field_sifraPostupka"
+              data-cy="sifraPostupka"
+              formControlName="sifraPostupka"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-control-label" for="field_sifraPonude">Sifra Ponude</label>
+            <input
+              type="number"
+              class="form-control"
+              name="sifraPonude"
+              id="field_sifraPonude"
+              data-cy="sifraPonude"
+              formControlName="sifraPonude"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-control-label" for="field_sifraPonudjaca">Sifra Ponudjaca</label>
+            <input
+              type="number"
+              class="form-control"
+              name="sifraPonudjaca"
+              id="field_sifraPonudjaca"
+              data-cy="sifraPonudjaca"
+              formControlName="sifraPonudjaca"
+            />
+          </div>
+        </div>
+
+    </form>
+  </div>
+</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="warn" mat-dialog-close>Odustani</button>
+  <button
+    id="sacuvaj-button"
+    mat-raised-button
+    color="primary"
+    (click)="save()"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+  >
+    Sačuvaj
+  </button>
+  <button
+    [disabled]="editForm.invalid"
+
+    mat-raised-button
+    color="primary"
+    (click)="confirmAdd()"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+  >
+    Dodaj
+  </button>
+</mat-dialog-actions>
+
